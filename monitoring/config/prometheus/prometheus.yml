@@ -1,0 +1,57 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: "production"
+    environment: "prod"
+
+rule_files:
+  - "alerts.yml"
+
+scrape_configs:
+  # ── Prometheus self-monitoring ──────────────────
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  # ── Node Exporter (host metrics) ────────────────
+  - job_name: "node-exporter"
+    static_configs:
+      - targets: ["node-exporter:9100"]
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        regex: "([^:]+):.*"
+        replacement: "$1"
+
+  # ── cAdvisor (container metrics) ────────────────
+  - job_name: "cadvisor"
+    static_configs:
+      - targets: ["cadvisor:8080"]
+    metric_relabel_configs:
+      # Drop high-cardinality metrics we don't need
+      - source_labels: [__name__]
+        regex: "container_(network_tcp_usage_total|tasks_state|memory_failures_total)"
+        action: drop
+
+  # ── Grafana self-monitoring ──────────────────────
+  - job_name: "grafana"
+    static_configs:
+      - targets: ["grafana:3000"]
+
+  # ── Tempo self-monitoring ────────────────────────
+  - job_name: "tempo"
+    static_configs:
+      - targets: ["tempo:3200"]
+    metrics_path: /metrics
+
+  # ── Your application services ───────────────────
+  # Add your app services here, e.g.:
+  #
+  # - job_name: "my-elysia-app"
+  #   static_configs:
+  #     - targets: ["my-app:9464"]
+  #   labels:
+  #     service: "my-elysia-app"
+
+remote_write: []

@@ -1,0 +1,17 @@
+apiVersion: 1
+
+# Uncomment and fill in to enable email/Slack/PagerDuty alerts from Grafana
+# contactPoints:
+#   - orgId: 1
+#     name: slack-alerts
+#     receivers:
+#       - uid: slack-receiver
+#         type: slack
+#         settings:
+#           url: "${SLACK_WEBHOOK_URL}"
+#           title: "Grafana Alert"
+#           text: "{{ template \"default.message\" . }}"
+
+# policies:
+#   - orgId: 1
+#     receiver: slack-alerts

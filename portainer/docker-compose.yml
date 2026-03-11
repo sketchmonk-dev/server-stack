@@ -1,0 +1,22 @@
+services:
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce:sts
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    labels:
+      caddy: infra.${DOMAIN}
+      caddy.handle.reverse_proxy: "{{upstreams http 9000}}"
+    networks:
+      - public
+volumes:
+  portainer_data:
+    name: portainer_data
+
+networks:
+  default:
+    name: portainer
+  public:
+    external: true
