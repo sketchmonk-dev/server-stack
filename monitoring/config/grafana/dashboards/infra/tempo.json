@@ -89,7 +89,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -153,7 +153,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "expr": "time() - node_boot_time_seconds{instance=~\"$server:.*\"}",
           "hide": false,
@@ -169,7 +169,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -234,7 +234,7 @@
           "intervalFactor": 2,
           "refId": "A",
           "step": 1800,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         }
       ],
       "title": "Containers",
@@ -243,7 +243,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -312,7 +312,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "expr": "node_load1{instance=~\"$server:.*\"} / count by(job, instance)(count by(job, instance, cpu)(node_cpu_seconds_total{instance=~\"$server:.*\"}))",
           "intervalFactor": 2,
@@ -326,7 +326,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -394,7 +394,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "expr": "min((node_filesystem_size_bytes{fstype=~\"xfs|ext4\",instance=~\"$server:.*\"} - node_filesystem_free_bytes{fstype=~\"xfs|ext4\",instance=~\"$server:.*\"} )/ node_filesystem_size_bytes{fstype=~\"xfs|ext4\",instance=~\"$server:.*\"})",
           "hide": false,
@@ -409,7 +409,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -477,7 +477,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "expr": "((node_memory_MemTotal_bytes{instance=~\"$server:.*\"} - node_memory_MemAvailable_bytes{instance=~\"$server:.*\"}) / node_memory_MemTotal_bytes{instance=~\"$server:.*\"}) * 100",
           "intervalFactor": 2,
@@ -491,7 +491,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -558,7 +558,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "expr": "(node_memory_SwapTotal_bytes{instance=~'$server:.*'} - node_memory_SwapFree_bytes{instance=~'$server:.*'})",
           "intervalFactor": 2,
@@ -579,7 +579,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "editable": true,
       "error": false,
@@ -626,7 +626,7 @@
           "legendFormat": "RECEIVED",
           "refId": "A",
           "step": 600,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         },
         {
           "expr": "- sum(rate(container_network_transmit_bytes_total{id=\"/\"}[$interval])) by (id)",
@@ -635,7 +635,7 @@
           "legendFormat": "SENT",
           "refId": "B",
           "step": 600,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         }
       ],
       "thresholds": [],
@@ -678,7 +678,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "editable": true,
       "error": false,
@@ -726,7 +726,7 @@
           "legendFormat": "a",
           "refId": "B",
           "step": 120,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         },
         {
           "expr": "sum(rate(container_cpu_system_seconds_total{name=~\".+\"}[1m]))",
@@ -736,7 +736,7 @@
           "legendFormat": "nur container",
           "refId": "F",
           "step": 10,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         },
         {
           "expr": "sum(rate(container_cpu_system_seconds_total{id=\"/\"}[1m]))",
@@ -747,7 +747,7 @@
           "metric": "",
           "refId": "A",
           "step": 20,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         },
         {
           "expr": "sum(rate(process_cpu_seconds_total[$interval])) * 100",
@@ -758,7 +758,7 @@
           "metric": "",
           "refId": "C",
           "step": 600,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         },
         {
           "expr": "sum(rate(container_cpu_system_seconds_total{name=~\".+\"}[1m])) + sum(rate(container_cpu_system_seconds_total{id=\"/\"}[1m])) + sum(rate(process_cpu_seconds_total[1m]))",
@@ -767,7 +767,7 @@
           "legendFormat": "",
           "refId": "D",
           "step": 120,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         }
       ],
       "thresholds": [],
@@ -843,7 +843,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "decimals": 0,
       "editable": true,
@@ -889,7 +889,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "expr": "node_load1{instance=~\"$server:.*\"} / count by(job, instance)(count by(job, instance, cpu)(node_cpu_seconds_total{instance=~\"$server:.*\"}))",
           "intervalFactor": 2,
@@ -943,7 +943,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -1086,7 +1086,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "expr": "node_filesystem_size_bytes{fstype=~\"ext4|xfs\"} - node_filesystem_free_bytes{fstype=~\"xfs|ext4\"}",
           "hide": false,
@@ -1109,7 +1109,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "editable": true,
       "error": false,
@@ -1153,7 +1153,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "expr": "-sum(rate(node_disk_read_bytes_total[$interval])) by (device)",
           "hide": false,
@@ -1166,7 +1166,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "expr": "sum(rate(node_disk_written_bytes_total[$interval])) by (device)",
           "intervalFactor": 2,
@@ -1214,7 +1214,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "editable": true,
       "error": false,
@@ -1263,7 +1263,7 @@
           "legendFormat": "{{name}}",
           "refId": "A",
           "step": 240,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         },
         {
           "expr": "- rate(container_network_transmit_bytes_total{name=~\".+\"}[$interval])",
@@ -1272,7 +1272,7 @@
           "legendFormat": "{{name}}",
           "refId": "B",
           "step": 10,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         }
       ],
       "thresholds": [],
@@ -1313,7 +1313,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "editable": true,
       "error": false,
@@ -1364,7 +1364,7 @@
           "legendFormat": "{{name}}",
           "refId": "A",
           "step": 240,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         },
         {
           "expr": "rate(container_network_transmit_bytes_total{id=\"/\"}[$interval])",
@@ -1373,7 +1373,7 @@
           "legendFormat": "",
           "refId": "B",
           "step": 10,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         }
       ],
       "thresholds": [],
@@ -1418,7 +1418,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "editable": true,
       "error": false,
@@ -1470,7 +1470,7 @@
           "metric": "",
           "refId": "F",
           "step": 240,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         }
       ],
       "thresholds": [],
@@ -1512,7 +1512,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "editable": true,
       "error": false,
@@ -1562,7 +1562,7 @@
           "legendFormat": "{{name}}",
           "refId": "A",
           "step": 240,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         },
         {
           "expr": "container_memory_usage_bytes{name=~\".+\"}",
@@ -1571,7 +1571,7 @@
           "legendFormat": "{{name}}",
           "refId": "B",
           "step": 240,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         }
       ],
       "thresholds": [],
@@ -1613,7 +1613,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "editable": true,
       "error": false,
@@ -1663,7 +1663,7 @@
           "legendFormat": "{{name}}",
           "refId": "A",
           "step": 240,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         },
         {
           "expr": "container_memory_usage_bytes{name=~\".+\"}",
@@ -1672,7 +1672,7 @@
           "legendFormat": "{{name}}",
           "refId": "B",
           "step": 240,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         }
       ],
       "thresholds": [],
@@ -1717,7 +1717,7 @@
       ],
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "editable": true,
       "error": false,
@@ -1765,7 +1765,7 @@
           "metric": "",
           "refId": "A",
           "step": 240,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         },
         {
           "expr": "sum(container_spec_memory_limit_bytes{name=~\".+\"}) by (name) ",
@@ -1774,7 +1774,7 @@
           "legendFormat": "{{name}}",
           "refId": "B",
           "step": 240,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         },
         {
           "expr": "container_memory_usage_bytes{name=~\".+\"}",
@@ -1783,7 +1783,7 @@
           "legendFormat": "{{name}}",
           "refId": "C",
           "step": 240,
-          "datasource": "${DS_PROMETHEUS}"
+          "datasource": "prometheus"
         }
       ],
       "title": "Usage memory",
@@ -1802,7 +1802,7 @@
         "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "prometheus"
         },
         "definition": "",
         "hide": 0,
@@ -1926,7 +1926,7 @@
         "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "prometheus"
         },
         "definition": "label_values(node_boot_time_seconds, instance)",
         "hide": 0,
