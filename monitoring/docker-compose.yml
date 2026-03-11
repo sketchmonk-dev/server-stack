@@ -25,7 +25,7 @@ services:
     labels:
       caddy: "prometheus.${DOMAIN}"
       caddy.basicauth: "*"
-      caddy.basicauth.${PROMETHEUS_USER}: "${PROMETHEUS_HASHED_PASSWORD}"
+      caddy.basicauth.admin: "${PROMETHEUS_HASHED_PASSWORD}"
       caddy.handle.reverse_proxy: "{{upstreams http 9090}}"
 
   # ──────────────────────────────────────────────
