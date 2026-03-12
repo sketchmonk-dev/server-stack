@@ -4,7 +4,7 @@ Complete server initialization stack with:
 
 - **Caddy** (automatic reverse proxy + TLS)
 - **Portainer** (Docker management UI)
-- **Monitoring stack**: Prometheus, Grafana, Tempo, cAdvisor, and Node Exporter
+- **Monitoring stack**: Prometheus, Grafana, Tempo, Alertmanager, cAdvisor, and Node Exporter
 
 ## Quick Start
 
@@ -26,7 +26,7 @@ After startup, open:
 
 - `caddy/docker-compose.yml` runs Caddy Docker Proxy on ports `80` and `443`.
 - `portainer/docker-compose.yml` publishes Portainer behind Caddy at `infra.<DOMAIN>`.
-- `monitoring/docker-compose.yml` runs Prometheus, Grafana, Tempo, cAdvisor, and Node Exporter.
+- `monitoring/docker-compose.yml` runs Prometheus, Grafana, Tempo, Alertmanager, cAdvisor, and Node Exporter.
 - Shared external Docker network: `public`.
 
 ## Prerequisites
@@ -67,7 +67,25 @@ PROMETHEUS_HASHED_PASSWORD=<caddy-compatible-hash>
 # Grafana admin credentials
 GRAFANA_ADMIN_USER=admin
 GRAFANA_ADMIN_PASSWORD=changeme
+
+# SMTP (used by Grafana and Alertmanager email notifications)
+SMTP_HOST=smtp.example.com:587
+SMTP_USER=your-smtp-user
+SMTP_PASSWORD=your-smtp-password
+SMTP_FROM_ADDRESS=alerts@example.com
+SMTP_FROM_NAME=Server Stack Alerts
 ```
+
+## Alerting Configuration
+
+Before using email alerts, update recipient addresses in both files:
+
+- `monitoring/config/grafana/provisioning/alerting/alerting.yml`
+	- Update `contactPoints[].receivers[].settings.addresses`
+- `monitoring/config/alertmanager/alertmanager.yml`
+	- Update `receivers[].email_configs[].to`
+
+Default placeholders (`you@yourdomain.com`, `oncall@yourdomain.com`) are examples and should be replaced with real target emails.
 
 ### Domain / DNS requirements
 
