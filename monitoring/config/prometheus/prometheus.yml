@@ -5,6 +5,11 @@ global:
     cluster: "production"
     environment: "prod"
 
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ["alertmanager:9093"]
+
 rule_files:
   - "alerts.yml"
 

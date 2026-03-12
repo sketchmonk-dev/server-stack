@@ -43,11 +43,11 @@ services:
       - GF_FEATURE_TOGGLES_ENABLE=traceqlEditor traceToMetrics
       - GF_AUTH_ANONYMOUS_ENABLED=false
       - GF_SMTP_ENABLED=true
-      - GF_SMTP_HOST=${GF_SMTP_HOST}
-      - GF_SMTP_USER=${GF_SMTP_USER}
-      - GF_SMTP_PASSWORD=${GF_SMTP_PASSWORD}
-      - GF_SMTP_FROM_ADDRESS=${GF_SMTP_FROM_ADDRESS}
-      - GF_SMTP_FROM_NAME=${GF_SMTP_FROM_NAME}
+      - GF_SMTP_HOST=${SMTP_HOST}
+      - GF_SMTP_USER=${SMTP_USER}
+      - GF_SMTP_PASSWORD=${SMTP_PASSWORD}
+      - GF_SMTP_FROM_ADDRESS=${SMTP_FROM_ADDRESS}
+      - GF_SMTP_FROM_NAME=${SMTP_FROM_NAME}
       - GF_SMTP_STARTTLS_POLICY=MandatoryStartTLS
     volumes:
       - ./config/grafana/provisioning:/etc/grafana/provisioning:ro
@@ -116,6 +116,24 @@ services:
       - /:/rootfs:ro
     networks:
       - monitoring
+  
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: alertmanager
+    restart: always
+    environment:
+      - ALERTMANAGER_SMTP_HOST=${SMTP_HOST}
+      - ALERTMANAGER_SMTP_USER=${SMTP_USER}
+      - ALERTMANAGER_SMTP_PASSWORD=${SMTP_PASSWORD}
+      - ALERTMANAGER_SMTP_FROM_ADDRESS=${SMTP_FROM_ADDRESS}
+    command:
+      - "--config.file=/etc/alertmanager/alertmanager.yml"
+      - "--storage.path=/alertmanager"
+    volumes:
+      - ./config/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+      - alertmanager_data:/alertmanager
+    networks:
+      - monitoring
 
 volumes:
   prometheus_data:
@@ -124,6 +142,8 @@ volumes:
     name: grafana_data
   tempo_data:
     name: tempo_data
+  alertmanager_data:
+    name: alertmanager_data
 
 networks:
   monitoring:
