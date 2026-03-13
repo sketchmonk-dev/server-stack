@@ -1,0 +1,26 @@
+{
+    "caddy": {
+        "directory": "stacks/caddy",
+        "dockerComposeFile": "docker-compose.yml"
+    },
+    "portainer": {
+        "directory": "stacks/portainer",
+        "dockerComposeFile": "docker-compose.yml",
+        "env": ["DOMAIN"]
+    },
+    "monitoring": {
+        "directory": "stacks/monitoring",
+        "dockerComposeFile": "docker-compose.yml",
+        "env": [
+            "DOMAIN",
+            "PROMETHEUS_HASHED_PASSWORD",
+            "GRAFANA_ADMIN_USER",
+            "GRAFANA_ADMIN_PASSWORD",
+            "SMTP_HOST",
+            "SMTP_USER",
+            "SMTP_PASSWORD",
+            "SMTP_FROM_ADDRESS",
+            "SMTP_FROM_NAME"
+        ]
+    }
+}
